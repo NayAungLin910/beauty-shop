@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+}
+
+@layer components {
+    .button-pink-rounded {
+        @apply bg-pink-500 border-4 border-pink-500 text-white duration-500 py-2 px-3
+        focus:outline-none focus:ring focus:ring-slate-300 rounded-full shadow-md
+      hover:text-sky-600 hover:border-sky-500 hover:bg-transparent active:bg-transparent active:text-sky-500;
+    }
+}

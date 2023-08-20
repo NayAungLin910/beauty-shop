@@ -1,0 +1,75 @@
+Users
+-----
+Normal users are customers who will be able to order products while admins will be able to create products
+-----
+id
+name
+email
+password
+image
+role - enum[1, 2] - 1 is deafult and it represents the user being a normal customer while 2 being an admin
+
+Tags
+----
+Tagging the products for users to be able to find by related categories
+----
+id
+user_id (User - foreign key) - will be used to keep record of admin who created the tag
+name
+
+Products
+--------
+Product that admin will be able to create and sell to normal users or customers
+--------
+id
+user_id (User - foreign key) - will be used to keep record of admin who created the product
+name
+description
+image
+price
+
+Product_Tag
+-------------
+Many to many relationship between tag and product
+-------------
+id
+product_id (Product - foreign key)
+tag_id (Tag - foreign key)
+
+Order
+----
+Order will also be used as a cart for user to put in items
+It will also be used for linking with related invoice
+--------
+id
+user_id (User - foreign key)
+product_id (Product - foreign key)
+quantity
+status - enum['order', 'cart'] - 'cart' is default and it represnts that the order is still inside the cart while 'order' represents the order has been orderered by the user
+
+Invoice
+-------
+Invoice will also be used as the history of how many products
+the user has purchased. And also be used for generating invoice
+pdf files
+-----------------
+id
+user_id (User - foreign key)
+description
+destination
+
+Invoice_Order
+-------------
+Many to Many Relationship between invoice and order
+----------------
+id
+invoice_id (Invoice - foreign key)
+order_id (Order - foreign key)
+
+
+
+
+
+
+
+
