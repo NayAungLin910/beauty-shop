@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('name');
-            $table->mediumText('desciption');
+            $table->mediumText('description');
             $table->string('image');
             $table->integer('price');
             $table->timestamps();
