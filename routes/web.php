@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\Statistics;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Home;
@@ -16,7 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Home::class);
+Route::get('/', Home::class)->name('home');
 
-Route::get('/login', Login::class);
-Route::get('/register', Register::class);
+Route::prefix('auth')->as('auth.')->group(function () {
+    Route::get('/login', Login::class)->name('login');
+    Route::get('/register', Register::class)->name('register');
+});
+
+Route::prefix('admin/dashboard')->as('admin.')->group(function () {
+    Route::get('/', Statistics::class)->name('statistics');
+});
