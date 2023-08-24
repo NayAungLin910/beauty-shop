@@ -4,6 +4,7 @@ use App\Livewire\Admin\Statistics;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Home;
+use App\Livewire\Profile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,11 +20,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 
-Route::prefix('auth')->as('auth.')->group(function () {
+Route::middleware(['notAuth'])->prefix('auth')->as('auth.')->group(function () {
     Route::get('/login', Login::class)->name('login');
     Route::get('/register', Register::class)->name('register');
 });
 
-Route::prefix('admin/dashboard')->as('admin.')->group(function () {
+Route::middleware(['userOrAdmin'])->prefix('user')->as('user.')->group(function () {
+    Route::get('/profile', Profile::class)->name('profile');
+});
+
+Route::middleware(['adminOnly'])->prefix('admin/dashboard')->as('admin.')->group(function () {
     Route::get('/', Statistics::class)->name('statistics');
 });

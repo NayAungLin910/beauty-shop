@@ -1,12 +1,7 @@
-@push('layout-style-stack')
-    <!-- toastify css -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-@endpush
-
 <!-- Toastify Session Partial -->
 @if (session()->has('error'))
-    <script>
-        Toastify({
+<script>
+    Toastify({
             text: "{{ session('error') }}",
             duration: 3000,
             destination: "",
@@ -16,15 +11,15 @@
             position: "right", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-                background: "linear-gradient(to right, #F12F26, #F06D67)",
+                background: "linear-gradient(to right, #F12F26, #900C3F)",
             },
             onClick: function() {} // Callback after click
         }).showToast();
-    </script>
+</script>
 @endif
 @if (session()->has('success'))
-    <script>
-        Toastify({
+<script>
+    Toastify({
             text: "{{ session('success') }}",
             duration: 3000,
             destination: "",
@@ -34,15 +29,15 @@
             position: "right", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                background: "linear-gradient(to right, #029C25, #03751D)",
             },
             onClick: function() {} // Callback after click
         }).showToast();
-    </script>
+</script>
 @endif
 @if (session()->has('info'))
-    <script>
-        Toastify({
+<script>
+    Toastify({
             text: "{{ session('info') }}",
             duration: 3000,
             destination: "",
@@ -52,14 +47,31 @@
             position: "right", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-                background: "linear-gradient(to right, #0978EE, #6EADEF)",
+                background: "linear-gradient(to right, #0978EE, #083B9C)",
             },
             onClick: function() {} // Callback after click
         }).showToast();
-    </script>
+</script>
 @endif
 
-@push('layout-script-stack')
-    <!-- toastify js -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-@endpush
+<script>
+
+    // listenes for toast message browser dispatch event from livewire
+    window.addEventListener('success', event => {
+
+        Toastify({
+                text: event.detail.message,
+                duration: 3000,
+                destination: "",
+                newWindow: true,
+                close: true,
+                gravity: "bottom", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #029C25, #03751D)",
+                },
+                onClick: function() {} // Callback after click
+            }).showToast();
+    })
+</script>

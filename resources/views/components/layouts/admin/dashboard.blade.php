@@ -32,7 +32,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
 
-
+    <!-- toastify css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <!-- Custom Styles -->
     @yield('layout-style')
@@ -54,7 +55,8 @@
             <div class="p-2.5 mt-1 flex items-center">
                 <ion-icon name="bar-chart-outline" class="px-2 py-1 bg-pink-900 rounded"></ion-icon>
                 <h1 class="font-bold text-[15px] ml-3">Tailwindbar</h1>
-                <ion-icon name="close-circle-outline" onclick="toggleSideBar()" class="ml-20 text-2xl cursor-pointer lg:hidden bg-pink-900 rounded-full"></ion-icon>
+                <ion-icon name="close-circle-outline" onclick="toggleSideBar()"
+                    class="ml-20 text-2xl cursor-pointer lg:hidden bg-pink-900 rounded-full"></ion-icon>
             </div>
             <hr class="my-2 text-gray-600">
         </div>
@@ -104,15 +106,18 @@
             <span class="text-[15px] ml-4">Logout</span>
         </div>
     </div>
-    
+
     <div class="lg:ml-[300px] mt-11 lg:mt-0">
         {{ $slot }}
     </div>
-    
+
 
     <!-- Ionic Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- toastify js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <!-- Custom Scripts -->
     @yield('layout-script')
