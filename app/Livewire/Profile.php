@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Auth\ChangePassword;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -46,6 +47,8 @@ class Profile extends Component
 
             $path = '/' . $this->image->store('images');
 
+            $this->reset('image');
+
             $this->iteration++; // cause the image input to reset value
 
             $this->dispatch('new-profile', src: $path);
@@ -59,6 +62,8 @@ class Profile extends Component
             ]);
 
         $this->dispatch('success', message: 'Profile updated!');
+
+        $this->dispatch('success')->to(ChangePassword::class);
     }
 
     #[Layout('components.layouts.app')]

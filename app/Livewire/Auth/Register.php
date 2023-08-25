@@ -46,7 +46,7 @@ class Register extends Component
         return redirect()->route('home')->with('success', 'Registered and logged in successfully!');
     }
 
-    #[Layout('components.layouts.unauth')]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.auth.register');

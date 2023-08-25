@@ -5,6 +5,8 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Home;
 use App\Livewire\Profile;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +29,15 @@ Route::middleware(['notAuth'])->prefix('auth')->as('auth.')->group(function () {
 
 Route::middleware(['userOrAdmin'])->prefix('user')->as('user.')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
+    Route::post('/logout', function (Request $request) {
+        if (Auth::check()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('home')->with('success', 'You have logged out successfully!');
+        }
+    })->name('logout');
 });
 
 Route::middleware(['adminOnly'])->prefix('admin/dashboard')->as('admin.')->group(function () {
