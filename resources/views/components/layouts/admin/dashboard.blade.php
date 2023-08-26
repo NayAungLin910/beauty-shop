@@ -51,33 +51,21 @@
     <!-- Sidebar -->
     <div
         class="sidebar text-white bg-pink-700 shadow fixed top-0 bottom-0 lg:left-0 left-[-300px] p-2 w-[300px] overflow-y-auto text-center">
-        <div class="text-xl">
-            <div class="p-2.5 mt-1 flex items-center">
-                <ion-icon name="bar-chart-outline" class="px-2 py-1 bg-pink-900 rounded"></ion-icon>
-                <h1 class="font-bold text-[15px] ml-3">Tailwindbar</h1>
-                <ion-icon name="close-circle-outline" onclick="toggleSideBar()"
-                    class="ml-20 text-2xl cursor-pointer lg:hidden bg-pink-900 rounded-full"></ion-icon>
+
+        <!-- Mobile View Close Sidebar toggle button -->
+        <div class="flex place-content-end">
+            <ion-icon name="close-circle-outline" onclick="toggleSideBar()"
+                class="float-right text-2xl cursor-pointer lg:hidden bg-pink-900 rounded-full"></ion-icon>
+        </div>
+
+        <!-- Tags -->
+        <a href="{{ route('admin.tags') }}">
+            <div
+                class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800 {{ request()->routeIs('admin.tags') ? 'bg-pink-800' : '' }}">
+                <ion-icon name="pricetag-outline" class="text-xl"></ion-icon>
+                <span class="text-[15px] ml-4">Tags</span>
             </div>
-            <hr class="my-2 text-gray-600">
-        </div>
-
-        <!--Search -->
-        <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-pink-800">
-            <ion-icon name="search-outline" class="text-xl"></ion-icon>
-            <input type="text" class="focus:outline-none text-[15px] ml-4 w-full bg-transparent" placeholder="Search">
-        </div>
-
-        <!-- Home -->
-        <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
-            <ion-icon name="home-outline" class="text-xl"></ion-icon>
-            <span class="text-[15px] ml-4">Home</span>
-        </div>
-
-        <!-- Bookmark -->
-        <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
-            <ion-icon name="bookmark-outline" class="text-xl"></ion-icon>
-            <span class="text-[15px] ml-4">Bookmark</span>
-        </div>
+        </a>
 
         <hr class="my-4 text-gray-600">
 
@@ -100,17 +88,32 @@
             <h1 class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1">Friends</h1>
         </div>
 
-        <!-- Logout-->
-        <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
-            <ion-icon name="log-out-outline" class="text-xl"></ion-icon>
-            <span class="text-[15px] ml-4">Logout</span>
-        </div>
     </div>
 
-    <div class="lg:ml-[300px] mt-11 lg:mt-0">
+    <div class="lg:ml-[300px] mt-11 lg:mt-0 pb-2">
         {{ $slot }}
     </div>
 
+    <!-- popup -->
+    <div class="bg-slate-100 duration-200 ease-in-out rounded-xl fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-md w-full md:w-auto z-30 py-6 px-4 scale-0 border-t-8"
+        id="popup">
+        <p class="text-lg font-semibold text-center" id="popup-text"></p>
+        <div class="flex items-center gap-2 place-content-center mt-4">
+            <button class="button-white-rounded w-auto" onclick="closePopup()">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+            </button>
+            <button class="button-pink-rounded w-auto" onclick="acceptPopup()">
+                <i class="fa-solid fa-check"></i>
+                Accept
+            </button>
+        </div>
+    </div>
+
+    <!-- popup overlay -->
+    <div class="duration-200 ease-in-out opacity-0 fixed top-0 left-0 bottom-0 right-0 bg-black/[0.5] z-20 pointer-events-none"
+        id="popup-overlay" onclick="closePopup()">
+    </div>
 
     <!-- Ionic Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -126,11 +129,13 @@
 
     @include('components.partials.toast')
 
+    @include('components.partials.popup')
+
     <script type="text/javascript">
         // handles submenu dropdown
         function dropDown(){
             document.querySelector('#submenu').classList.toggle('hidden')
-            document.querySelector('#arrow').classList.toggle('rotate-0')
+            document.querySelector('#arrow').classList.toggle('rotate-180')
         }
 
         // toggle the sidebar for mobile view

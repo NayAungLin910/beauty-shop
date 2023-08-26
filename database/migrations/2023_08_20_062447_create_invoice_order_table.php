@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('invoice_order', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id')->constrained();
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('invoice_id');
+            $table->foreignId('order_id');
             $table->timestamps();
         });
     }

@@ -35,6 +35,14 @@
     file:h-8 border border-pink-500 focus:ring focus:ring-pink-500;
     }
 
+    .table-th {
+        @apply p-2 w-auto tracking-wide font-semibold whitespace-nowrap text-left;
+    }
+
+    .table-td {
+        @apply p-2 w-auto font-normal whitespace-nowrap;
+    }
+
     .input-checkbox {
         @apply w-5 my-2 px-2 h-5 block;
     }

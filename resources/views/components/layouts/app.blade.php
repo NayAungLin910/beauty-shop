@@ -62,9 +62,9 @@
                     @if (Auth::check())
                     <li class="group/auth pr-4">
                         <button class="cursor-pointer">
-                            <img id="profile-image" src="/storage{{ Auth::user()->image }}"
-                                class="max-w-12 max-h-12 border rounded-full shadow" loading="lazy"
-                                alt="{{ Auth::user()->name }}'s profile image" />
+                            <img id="profile-image" src="{{ asset("/storage" . Auth::user()->image) }}"
+                            class="max-w-12 max-h-12 border rounded-full shadow" loading="lazy"
+                            alt="{{ Auth::user()->name }}'s profile image" />
                         </button>
                         <div id="profile-dropdown"
                             class="hidden md:absolute group-hover/auth:block rounded-lg w-auto bg-white text-black shadow py-2 px-1">
@@ -90,7 +90,8 @@
                                 </a>
 
                                 <li class="rounded-lg p-2 hover:bg-gray-100">
-                                    <form id="admin-logout-accept-form" action="{{ route('user.logout') }}" method="POST">
+                                    <form id="admin-logout-accept-form" action="{{ route('user.logout') }}"
+                                        method="POST">
                                         @csrf
                                         <button type="button"
                                             onclick='openPopupSubmit("Are you sure about logging out form your account?", "admin-logout", true)'
@@ -107,7 +108,7 @@
                     <!-- Not logied yet -->
                     <li class="group/unauth pr-6">
                         <button class="cursor-pointer">
-                            <img id="unauth-image" src="/storage/images/example_user_profile.png"
+                            <img id="unauth-image" src="{{ asset('storage/default_images/example_user_profile.png') }}"
                                 class="w-12 max-h-12 border rounded-full shadow" loading="lazy"
                                 alt="unauthenticated user's profile image" />
                         </button>
@@ -167,7 +168,6 @@
     <div class="duration-200 ease-in-out opacity-0 fixed top-0 left-0 bottom-0 right-0 bg-black/[0.5] z-20 pointer-events-none"
         id="popup-overlay" onclick="closePopup()">
     </div>
-
 
     <!-- Ionic Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
