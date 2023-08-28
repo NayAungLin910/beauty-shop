@@ -3,7 +3,6 @@
 namespace App\Livewire\Tag;
 
 use App\Models\Tag as ModelsTag;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;

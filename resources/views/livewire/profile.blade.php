@@ -33,7 +33,7 @@
                 <label for="image">New Profile Image</label>
 
                 <!-- Image Preview -->
-                @if ($image)
+                @if ($image && !$errors->first('image'))
                 <img loading="lazy" src="{{ $image->temporaryUrl() }}" class="w-[50%] rounded-lg mx-auto"
                     alt="Image Preview">
                 @endif

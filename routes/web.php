@@ -4,6 +4,9 @@ use App\Livewire\Admin\Statistics;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Home;
+use App\Livewire\Product\CreateProduct;
+use App\Livewire\Product\EditProduct;
+use App\Livewire\Product\ViewProduct;
 use App\Livewire\Profile;
 use App\Livewire\Tag\Tag;
 use Illuminate\Support\Facades\Auth;
@@ -46,4 +49,11 @@ Route::middleware(['adminOnly'])->prefix('admin/dashboard')->as('admin.')->group
 
     // tags
     Route::get('/tags', Tag::class)->name('tags');
+
+    // products
+    Route::prefix('products')->as('products.')->group(function () {
+        Route::get('/create', CreateProduct::class)->name('create');
+        Route::get('/', ViewProduct::class)->name('view');
+        Route::get('/edit/{id}', EditProduct::class)->name('edit');
+    });
 });

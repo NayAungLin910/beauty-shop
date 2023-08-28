@@ -58,6 +58,15 @@
                 class="float-right text-2xl cursor-pointer lg:hidden bg-pink-900 rounded-full"></ion-icon>
         </div>
 
+        <!-- Home -->
+        <a href="{{ route('home') }}">
+            <div
+                class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
+                <ion-icon name="arrow-back-outline" class="text-xl"></ion-icon>
+                <span class="text-[15px] ml-4">Back</span>
+            </div>
+        </a>
+
         <!-- Tags -->
         <a href="{{ route('admin.tags') }}">
             <div
@@ -69,23 +78,32 @@
 
         <hr class="my-4 text-gray-600">
 
-        <!-- Chatbox -->
-        <div onclick="dropDown()"
+        <!-- Products -->
+        <div onclick="dropDown('product')"
             class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
-            <ion-icon name="chatbubble-outline" class=" text-xl"></ion-icon>
+            <ion-icon name="cube-outline" class=" text-xl"></ion-icon>
             <div class="flex justify-between w-full items-center">
-                <span class="text-[15px] ml-4">Chatbox</span>
-                <span class="text-sm rotate-180 duration-300" id="arrow">
+                <span class="text-[15px] ml-4">Product</span>
+                <span class="text-sm duration-300 {{ !request()->is('admin/dashboard/products*') ? 'rotate-180' : '' }}"
+                    id="product-arrow">
                     <ion-icon name="chevron-down-outline"></ion-icon>
                 </span>
             </div>
         </div>
 
-        <!-- Chatbox submenu -->
-        <div class="text-left text-sm font-thin mt-2 w-4/5 mx-auto " id="submenu">
-            <h1 class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1">Social</h1>
-            <h1 class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1">Personal</h1>
-            <h1 class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1">Friends</h1>
+        <!-- Product Submenu -->
+        <div class="text-left text-sm font-thin mt-2 w-4/5 mx-auto {{ !request()->is('admin/dashboard/products*') ? 'hidden' : '' }}"
+            id="product-submenu">
+            <a href="{{ route('admin.products.create') }}">
+                <h1
+                    class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1 {{ request()->routeIs('admin.products.create') ? 'bg-pink-800' : '' }}">
+                    Create</h1>
+            </a>
+            <a href="{{ route('admin.products.view') }}">
+                <h1
+                    class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1 {{ request()->routeIs('admin.products.view') ? 'bg-pink-800' : '' }}">
+                    View</h1>
+            </a>
         </div>
 
     </div>
@@ -133,9 +151,9 @@
 
     <script type="text/javascript">
         // handles submenu dropdown
-        function dropDown(){
-            document.querySelector('#submenu').classList.toggle('hidden')
-            document.querySelector('#arrow').classList.toggle('rotate-180')
+        function dropDown(type){
+            document.querySelector(`#${type}-submenu`).classList.toggle('hidden')
+            document.querySelector(`#${type}-arrow`).classList.toggle('rotate-180')
         }
 
         // toggle the sidebar for mobile view
