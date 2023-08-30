@@ -60,8 +60,7 @@
 
         <!-- Home -->
         <a href="{{ route('home') }}">
-            <div
-                class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
+            <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
                 <ion-icon name="arrow-back-outline" class="text-xl"></ion-icon>
                 <span class="text-[15px] ml-4">Back</span>
             </div>
@@ -75,8 +74,6 @@
                 <span class="text-[15px] ml-4">Tags</span>
             </div>
         </a>
-
-        <hr class="my-4 text-gray-600">
 
         <!-- Products -->
         <div onclick="dropDown('product')"
@@ -105,6 +102,17 @@
                     View</h1>
             </a>
         </div>
+
+        <hr class="my-4 text-gray-600">
+
+        <!-- Accounts -->
+        <a href="{{ route('admin.accounts') }}">
+            <div
+                class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800 {{ request()->routeIs('admin.accounts') ? 'bg-pink-800' : '' }}">
+                <ion-icon name="receipt-outline"></ion-icon>
+                <span class="text-[15px] ml-4">Accounts</span>
+            </div>
+        </a>
 
     </div>
 

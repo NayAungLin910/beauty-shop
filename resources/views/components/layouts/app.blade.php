@@ -35,13 +35,16 @@
     <!-- toastify css -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
     <!-- Custom Styles -->
     @yield('layout-style')
 
     @stack('layout-style-stack')
 </head>
 
-<body class="font-cabin bg-gradient-to-t from-[#e0bad5] to-[#f1b5d8] h-screen">
+<body class="font-cabin bg-gradient-to-t bg-pink-300">
     <header class="bg-slate-50 shadow-md">
         <nav class="flex justify-between md:justify-normal items-center w-[92%] mx-auto p-1">
             <a href="{{ route('home') }}">
@@ -58,13 +61,19 @@
                 class="nav-links md:static absolute ease-in-out transition-all duration-500 bg-slate-50 md:min-h-fit left-0 top-[-100%] w-full md:w-auto flex items-center px-5 py-2">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-2 mx-2">
 
+                    <!-- Search Product -->
+                    <li>
+                        <a class="text-lg hover:text-pink-500 {{ request()->routeIs('products.view') ? 'text-pink-500' : '' }}"
+                            href="{{ route('products.view') }}">Search Products</a>
+                    </li>
+
                     <!-- Profile -->
                     @if (Auth::check())
                     <li class="group/auth pr-4">
                         <button class="cursor-pointer">
-                            <img id="profile-image" src="{{ asset("/storage" . Auth::user()->image) }}"
-                            class="max-w-12 max-h-12 border rounded-full shadow" loading="lazy"
-                            alt="{{ Auth::user()->name }}'s profile image" />
+                            <img id="profile-image" src="{{ asset('/storage'.Auth::user()->image) }}"
+                                class="max-w-12 max-h-12 border rounded-full shadow" loading="lazy"
+                                alt="{{ Auth::user()->name }}'s profile image" />
                         </button>
                         <div id="profile-dropdown"
                             class="hidden md:absolute group-hover/auth:block rounded-lg w-auto bg-white text-black shadow py-2 px-1">
@@ -134,6 +143,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
+
+                    @if(Auth::check() && Auth::user()->role === '1')
+                    <!-- Cart Icon -->
+                    <livewire:cart.cart-icon />  
                     @endif
 
                 </ul>

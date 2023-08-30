@@ -55,13 +55,13 @@ class ViewProduct extends Component
 
         $products = $this->sort === 'latest' ? $products->latest() : $products->oldest();
 
-        if ($this->min && $this->max) {
+        if ($this->min || $this->max) {
             $products = $products->whereBetween('price', [$this->min, $this->max]);
         }
 
         $products = $products->latest();
 
-        $products = $products->paginate(10);
+        $products = $products->with('orders')->paginate(10);
 
         return view('livewire.product.view-product', compact('products'));
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Account\Account;
 use App\Livewire\Admin\Statistics;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
@@ -8,6 +9,8 @@ use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\EditProduct;
 use App\Livewire\Product\ViewProduct;
 use App\Livewire\Profile;
+use App\Livewire\Public\Product\SingleProduct;
+use App\Livewire\Public\Product\ViewProduct as ProductViewProduct;
 use App\Livewire\Tag\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -25,6 +28,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Home::class)->name('home');
+
+Route::prefix('products')->as('products.')->group((function () {
+    Route::get('/', ProductViewProduct::class)->name('view');
+    Route::get('/view/{id}', SingleProduct::class)->name('single');
+}));
 
 Route::middleware(['notAuth'])->prefix('auth')->as('auth.')->group(function () {
     Route::get('/login', Login::class)->name('login');
@@ -56,4 +64,7 @@ Route::middleware(['adminOnly'])->prefix('admin/dashboard')->as('admin.')->group
         Route::get('/', ViewProduct::class)->name('view');
         Route::get('/edit/{id}', EditProduct::class)->name('edit');
     });
+
+    // accounts
+    Route::get('/accounts', Account::class)->name('accounts');
 });
