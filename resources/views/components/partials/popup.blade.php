@@ -25,7 +25,6 @@ function acceptPopup() {
     if(this.event === "") {
         document.getElementById(`${this.identity}-accept-form`).submit(); // submit the given form 
     }else {
-        console.log(this.event, this.id)
         Livewire.dispatch(this.event, {id: this.id});
     }
     

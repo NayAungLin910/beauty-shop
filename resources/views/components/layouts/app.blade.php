@@ -147,7 +147,9 @@
 
                     @if(Auth::check() && Auth::user()->role === '1')
                     <!-- Cart Icon -->
-                    <livewire:cart.cart-icon />  
+                    <a href="{{ route('carts.view') }}">
+                        <livewire:cart.cart-icon />
+                    </a>
                     @endif
 
                 </ul>

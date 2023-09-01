@@ -18,6 +18,10 @@ class Order extends Model
         'status',
     ];
 
+    protected $appends = [
+        'sub_price',
+    ];
+
     /**
      * Get the user who orders or put into the cart
      */
@@ -40,5 +44,15 @@ class Order extends Model
     public function invoices(): BelongsToMany
     {
         return $this->belongsToMany(Invoice::class);
+    }
+
+    /**
+     * Get the subtotal price of the order
+     */
+    public function getSubPriceAttribute()
+    {
+        $subPrice = $this->quantity * $this->product->price;
+
+        return $subPrice;
     }
 }

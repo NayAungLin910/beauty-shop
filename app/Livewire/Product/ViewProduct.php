@@ -24,6 +24,7 @@ class ViewProduct extends Component
     public function resetFilter()
     {
         $this->reset();
+        $this->resetPage();
     }
 
     #[On('product-delete')]

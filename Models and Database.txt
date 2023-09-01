@@ -65,11 +65,3 @@ Many to Many Relationship between invoice and order
 id
 invoice_id (Invoice - foreign key)
 order_id (Order - foreign key)
-
-
-
-
-
-
-
-

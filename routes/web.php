@@ -4,6 +4,7 @@ use App\Livewire\Account\Account;
 use App\Livewire\Admin\Statistics;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Cart\ViewCart;
 use App\Livewire\Home;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\EditProduct;
@@ -28,6 +29,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Home::class)->name('home');
+
+Route::prefix('carts')->as('carts.')->group(function () {
+    Route::get('/', ViewCart::class)->name('view');
+});
 
 Route::prefix('products')->as('products.')->group((function () {
     Route::get('/', ProductViewProduct::class)->name('view');

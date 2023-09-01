@@ -57,10 +57,10 @@
                             {{ $product->description }}
                         </p>
 
-                        @if (Auth::check() && $product->orders()->where('user_id', Auth::user()->id)->first())
+                        @if (Auth::check() && $product->orders()->where('status', 'cart')->where('product_id', $product->id)->where('user_id', Auth::user()->id)->first())
                         <div class="mt-4">
                             <span class="rounded-xl p-2 bg-black shadow text-white">
-                                In Cart: {{ $product->orders()->where('user_id', Auth::user()->id)->first()->quantity }}
+                                In Cart: {{ $product->orders()->where('status', 'cart')->where('product_id', $product->id)->where('user_id', Auth::user()->id)->first()->quantity }}
                             </span>
                         </div>
                         @endif

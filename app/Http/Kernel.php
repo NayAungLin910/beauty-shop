@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\NotAuth;
+use App\Http\Middleware\UserOnly;
 use App\Http\Middleware\UserOrAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -70,5 +71,6 @@ class Kernel extends HttpKernel
         'adminOnly' => AdminOnly::class,
         'userOrAdmin' => UserOrAdmin::class,
         'notAuth' => NotAuth::class,
+        'authOnly' => UserOnly::class,
     ];
 }

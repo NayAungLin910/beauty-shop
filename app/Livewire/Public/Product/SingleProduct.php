@@ -19,7 +19,7 @@ class SingleProduct extends Component
         $this->product = Product::where('id', $id)->first();
 
         if(Auth::check() && Auth::user()->role === '1'){
-            $this->cart = $this->product->orders()->where('user_id', Auth::user()->id)->first()->quantity ?? 0;
+            $this->cart = $this->product->orders()->where('status', 'cart')->where('user_id', Auth::user()->id)->first()->quantity ?? 0;
         }
 
         // $this->cart = Auth::check() && Auth::user()->role == '1' ? $this->product->orders()->where('user_id', Auth::user()->id)->first()->quantity : '';
@@ -48,7 +48,7 @@ class SingleProduct extends Component
                 }
             }
 
-            $this->cart = $this->product->orders()->where('user_id', Auth::user()->id)->first()->quantity;
+            $this->cart = $this->product->orders()->where('status', 'cart')->where('user_id', Auth::user()->id)->first()->quantity;
         }
     }
 
