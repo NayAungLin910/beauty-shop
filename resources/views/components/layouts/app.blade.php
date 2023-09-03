@@ -61,9 +61,12 @@
                 class="nav-links md:static absolute ease-in-out transition-all duration-500 bg-slate-50 md:min-h-fit left-0 top-[-100%] w-full md:w-auto flex items-center px-5 py-2">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-2 mx-2">
 
+                    <!-- Search Box -->
+                    <livewire:search.search-box />
+
                     <!-- Search Product -->
                     <li>
-                        <a class="text-lg hover:text-pink-500 {{ request()->routeIs('products.view') ? 'text-pink-500' : '' }}"
+                        <a class="text-lg hover:text-pink-500 {{ request()->routeIs('products*') ? 'text-pink-500' : '' }}"
                             href="{{ route('products.view') }}">Search Products</a>
                     </li>
 
@@ -97,6 +100,15 @@
                                         Profile
                                     </li>
                                 </a>
+
+                                @if (Auth::user()->role === '1')
+                                <!-- Invoices -->
+                                <a class="text-black hover:no-underline" href="{{ route('invoices.view') }}">
+                                    <li class="rounded-lg cursor-pointer px-4 py-2 hover:bg-gray-100">
+                                        Invoices
+                                    </li>
+                                </a>
+                                @endif
 
                                 <li class="rounded-lg p-2 hover:bg-gray-100">
                                     <form id="admin-logout-accept-form" action="{{ route('user.logout') }}"

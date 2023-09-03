@@ -10,6 +10,15 @@
             <p class="my-2">
                 {{ $product->description }}
             </p>
+            <div class="flex flex-wrap mt-3 gap-1">
+                @foreach ($product->tags as $tag)
+                <a href="{{ route('products.view-pre', ['tagId' => $tag->id]) }}">
+                    <span class="bg-pink-200 hover:bg-pink-400 p-1 text-black text-sm rounded-lg">
+                        {{ $tag->name }}
+                    </span>
+                </a>
+                @endforeach
+            </div>
             @if ($cart)
             <div class="mt-4">
                 <span class="rounded-xl p-2 bg-black shadow">

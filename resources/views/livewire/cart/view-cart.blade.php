@@ -3,6 +3,28 @@
     <!-- Header --->
     <h1 class="text-2xl text-center my-2">Your Cart</h1>
 
+    <div class="my-2 mx-1 flex gap-2">
+        <!-- Description -->
+        <div class="my-2 md:w-1/3">
+            <label for="description">Description</label>
+            <textarea class="input-form-pink h-28" name="description" id="description"
+                wire:model='description'></textarea>
+            @error('description')
+            <span class="text-red-600 bg-white w-auto rounded p-1">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Destination -->
+        <div class="my-2 md:w-1/3">
+            <label for="destination">Destination</label>
+            <textarea class="input-form-pink h-28" name="destination" id="destination"
+                wire:model='destination'></textarea>
+            @error('destination')
+            <span class="text-red-600 bg-white w-auto rounded p-1">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+
     <div class="p-2 flex flex-wrap gap-2">
 
         <!-- Sort By -->

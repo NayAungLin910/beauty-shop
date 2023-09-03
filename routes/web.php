@@ -6,6 +6,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Cart\ViewCart;
 use App\Livewire\Home;
+use App\Livewire\Invoice\ViewInvoice;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\EditProduct;
 use App\Livewire\Product\ViewProduct;
@@ -13,9 +14,11 @@ use App\Livewire\Profile;
 use App\Livewire\Public\Product\SingleProduct;
 use App\Livewire\Public\Product\ViewProduct as ProductViewProduct;
 use App\Livewire\Tag\Tag;
+use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Dompdf\Dompdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +33,38 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 
-Route::prefix('carts')->as('carts.')->group(function () {
-    Route::get('/', ViewCart::class)->name('view');
+// for normal user only
+Route::middleware(['authOnly'])->group(function () {
+
+    // carts
+    Route::prefix('carts')->as('carts.')->group(function () {
+        Route::get('/', ViewCart::class)->name('view');
+    });
+
+    // invoices
+    Route::prefix('invoices')->as('invoices.')->group(function () {
+        Route::get('/', ViewInvoice::class)->name('view');
+        Route::get('/download/{id}', function ($id) {
+
+            $invoice = Invoice::where('id', $id)->with('orders')->first();
+
+            $dompdf = new Dompdf();
+
+            $dompdf->loadHtml(view('invoice.single-invoice', compact('invoice')));
+
+            $dompdf->setPaper('A4', 'landscape');
+
+            $dompdf->render();
+
+            $dompdf->stream('invoice.pdf');
+
+        })->name('download');
+    });
 });
 
 Route::prefix('products')->as('products.')->group((function () {
     Route::get('/', ProductViewProduct::class)->name('view');
+    Route::get('/pre-values/{tagId?}', ProductViewProduct::class)->name('view-pre');
     Route::get('/view/{id}', SingleProduct::class)->name('single');
 }));
 

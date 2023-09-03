@@ -17,6 +17,10 @@ class Invoice extends Model
         'destination',
     ];
 
+    protected $appneds = [
+        'total_price',
+    ];
+
     /**
      * Get the customer who created the invoice
      */
@@ -31,5 +35,14 @@ class Invoice extends Model
     public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Order::class);
+    }
+
+    /**
+     * Get the total price of the invoice
+     */
+    public function getTotalPriceAttribute()
+    {
+
+        return $this->orders()->get()->sum('sub_price');
     }
 }

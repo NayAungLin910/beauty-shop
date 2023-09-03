@@ -2,14 +2,22 @@
 
 namespace App\Livewire\Cart;
 
+use App\Models\Invoice;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class ViewCart extends Component
 {
+    #[Rule('required')]
+    public $description;
+
+    #[Rule('required')]
+    public $destination;
+
     public $orders;
 
     public $totalPrice;
@@ -44,9 +52,23 @@ class ViewCart extends Component
     #[On('product-buy')]
     public function buy()
     {
-        Order::where('user_id', Auth::user()->id)->where('status', 'cart')->update([
-            'status' => 'order'
+        $this->validate();
+
+        $invoice = Invoice::create([
+            'user_id' => Auth::user()->id,
+            'description' => $this->description,
+            'destination' => $this->destination,
         ]);
+
+        $orders = Order::where('user_id', Auth::user()->id)->where('status', 'cart');
+
+        $invoice->orders()->sync($orders->get()->pluck('id'));
+
+        $orders->update([
+            'status' => 'order',
+        ]);
+
+        $this->reset(['description', 'destination']);
 
         $this->dispatch('cart-bought');
 

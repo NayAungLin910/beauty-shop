@@ -3,6 +3,8 @@
 namespace App\Livewire\Product;
 
 use App\Models\Product;
+use App\Models\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -21,9 +23,18 @@ class ViewProduct extends Component
 
     public $max = 0;
 
+    public $tags;
+
+    public $tagId = 'default-tag';
+
+    public function mount()
+    {
+        $this->tags = Tag::orderBy('name')->select('id', 'name')->get();
+    }
+
     public function resetFilter()
     {
-        $this->reset();
+        $this->resetExcept('tags');
         $this->resetPage();
     }
 
@@ -60,9 +71,15 @@ class ViewProduct extends Component
             $products = $products->whereBetween('price', [$this->min, $this->max]);
         }
 
+        if ($this->tagId !== 'default-tag') {
+            $products = $products->whereHas('tags', function (Builder $query) {
+                $query->where('tags.id', $this->tagId);
+            });
+        }
+
         $products = $products->latest();
 
-        $products = $products->with('orders')->paginate(10);
+        $products = $products->with('orders')->with('tags:id,name')->paginate(10);
 
         return view('livewire.product.view-product', compact('products'));
     }
