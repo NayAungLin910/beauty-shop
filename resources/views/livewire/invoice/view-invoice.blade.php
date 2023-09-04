@@ -119,7 +119,6 @@
     <h2 class="text-center text-lg">No invoices yet!</h2>
     @endif
 
-
     @if ($invoices && $invoices->count())
     <!-- Pagination -->
     <div wire:loading.delay.short.remove class="m-2">

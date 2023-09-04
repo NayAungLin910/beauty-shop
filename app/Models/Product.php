@@ -20,6 +20,10 @@ class Product extends Model
         'price',
     ];
 
+    protected $appends = [
+        'total_buy_count',
+    ];
+
     /**
      * Get the admin user who created the product
      */
@@ -42,5 +46,13 @@ class Product extends Model
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get total bought count of the product
+     */
+    public function getTotalBuyCountAttribute(): int
+    {
+        return $this->orders->sum('quantity');
     }
 }

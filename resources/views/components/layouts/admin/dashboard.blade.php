@@ -67,6 +67,15 @@
         </a>
 
         <!-- Tags -->
+        <a href="{{ route('admin.statistics') }}">
+            <div
+                class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800 {{ request()->routeIs('admin.statistics') ? 'bg-pink-800' : '' }}">
+                <ion-icon name="stats-chart-outline" class="text-xl"></ion-icon>
+                <span class="text-[15px] ml-4">Statistics</span>
+            </div>
+        </a>
+
+        <!-- Tags -->
         <a href="{{ route('admin.tags') }}">
             <div
                 class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800 {{ request()->routeIs('admin.tags') ? 'bg-pink-800' : '' }}">
