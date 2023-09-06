@@ -12,7 +12,7 @@
     </div>
     @if ($search)
     @if ($tags && $tags->count() || $products && $products->count())
-    <div class="md:absolute ml-6 rounded-lg w-auto bg-white text-black shadow py-2 px-1 text-sm max-w-[20rem]">
+    <div class="md:absolute ml-6 z-30 rounded-lg w-auto bg-white text-black shadow py-2 px-1 text-sm max-w-[20rem]">
         @if ($tags && $tags->count())
         <h2 class="text-pink-700 mb-2">Tags</h2>
         <div class="flex flex-wrap gap-2">
