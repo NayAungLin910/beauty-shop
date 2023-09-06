@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->mediumText('description');
-            $table->text('destination');
+            $table->mediumText('description')->nullable();
+            $table->text('destination')->nullable();
             $table->timestamps();
         });
     }

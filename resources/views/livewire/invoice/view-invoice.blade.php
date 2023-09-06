@@ -21,7 +21,7 @@
     @foreach ($invoices as $invoice)
     <div class="rounded-lg bg-white p-2 m-2" id="invoice-{{ $loop->index + 1 }}">
         <div class="my-2 mx-1 text-normal">
-            <!-- Description -->
+            {{-- <!-- Description -->
             <div class="my-2 md:w-1/3">
                 <span class="font-bold">
                     Description
@@ -41,7 +41,7 @@
                 <p class="my-2">
                     {{ $invoice->destination }}
                 </p>
-            </div>
+            </div> --}}
         </div>
 
         <hr>

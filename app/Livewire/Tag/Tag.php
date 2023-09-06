@@ -32,6 +32,8 @@ class Tag extends Component
             'user_id' => Auth::user()->id,
         ]);
 
+        $this->reset('name');
+
         if ($tag) {
             $this->dispatch('success', message: 'A new tag has been created!');
         }

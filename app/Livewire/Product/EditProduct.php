@@ -49,11 +49,11 @@ class EditProduct extends Component
 
     public function submit()
     {
-        $this->validate([
-            'name' => 'required|unique:products,name,' . $this->product->id,
-            'image' => 'nullable|image',
-            'description' => 'required',
-        ]);
+        // $this->validate([
+        //     'name' => 'required|unique:products,name,' . $this->product->id,
+        //     'image' => 'nullable|image',
+        //     'description' => 'required',
+        // ]);
 
         $path = $this->product->image;
 

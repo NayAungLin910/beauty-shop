@@ -4,6 +4,7 @@ use App\Livewire\Account\Account;
 use App\Livewire\Admin\Statistics;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Cart\DammCart;
 use App\Livewire\Cart\ViewCart;
 use App\Livewire\Home;
 use App\Livewire\Invoice\ViewInvoice;
@@ -38,7 +39,8 @@ Route::middleware(['authOnly'])->group(function () {
 
     // carts
     Route::prefix('carts')->as('carts.')->group(function () {
-        Route::get('/', ViewCart::class)->name('view');
+        // Route::get('/', ViewCart::class)->name('view');
+        Route::get('/', DammCart::class)->name('view');
     });
 
     // invoices

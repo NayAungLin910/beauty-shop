@@ -1,28 +1,5 @@
 <div style="border-radius: 0.5rem; background-color: white; padding: 0.5rem; margin: 0.5rem;">
-    <div style="margin-top: 0.5rem; margin-bottom: 0.5rem; margin-left: 0.25rem; margin-right: 0.25rem;">
-        <!-- Description -->
-        <div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <span style="font-weight: 700;">
-                Description
-            </span>
-            <br />
-            <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                {{ $invoice->description }}
-            </p>
-        </div>
-        <hr class="">
-        <!-- Destination -->
-        <div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-            <span style="font-weight: 700;">
-                Destination
-            </span>
-            <br />
-            <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                {{ $invoice->destination }}
-            </p>
-        </div>
-    </div>
-
+    
     <hr>
 
     <div style="padding: 0.5rem">

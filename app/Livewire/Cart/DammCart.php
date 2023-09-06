@@ -10,13 +10,13 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class ViewCart extends Component
+class DammCart extends Component
 {
-    #[Rule('required')]
-    public $description;
+    // #[Rule('required')]
+    // public $description;
 
-    #[Rule('required')]
-    public $destination;
+    // #[Rule('required')]
+    // public $destination;
     
     public $orders;
 
@@ -52,13 +52,12 @@ class ViewCart extends Component
     #[On('product-buy')]
     public function buy()
     {
-        dd($this->description);
-        $this->validate();
+        // $this->validate();
 
         $invoice = Invoice::create([
             'user_id' => Auth::user()->id,
-            'description' => $this->description,
-            'destination' => $this->destination,
+            // 'description' => $this->description,
+            // 'destination' => $this->destination,
         ]);
 
         $orders = Order::where('user_id', Auth::user()->id)->where('status', 'cart');
@@ -69,7 +68,7 @@ class ViewCart extends Component
             'status' => 'order',
         ]);
 
-        $this->reset(['description', 'destination']);
+        // $this->reset(['description', 'destination']);
 
         $this->dispatch('cart-bought');
 
@@ -97,6 +96,6 @@ class ViewCart extends Component
 
         $this->totalPrice = $this->orders->sum('sub_price');
 
-        return view('livewire.cart.view-cart');
+        return view('livewire.cart.damm-cart');
     }
 }
