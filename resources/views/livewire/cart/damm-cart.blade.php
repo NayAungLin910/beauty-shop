@@ -54,7 +54,7 @@
             <tbody class="border-b border-pink-100">
                 @if ($orders->count())
                 @foreach ($orders as $order)
-                <tr class="border-b group/order hover:bg-pink-200 border-pink-100">
+                <tr class="border-b group/order hover:bg-pink-200 border-pink-100" wire:key="{{ $order->id }}">
                     <td class="table-td">
                         {{ $order->product->name }}
                     </td>

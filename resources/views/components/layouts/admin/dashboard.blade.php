@@ -112,6 +112,34 @@
             </a>
         </div>
 
+        <!-- Blogs -->
+        <div onclick="dropDown('blog')"
+            class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-pink-800">
+            <ion-icon name="book-outline" class=" text-xl"></ion-icon>
+            <div class="flex justify-between w-full items-center">
+                <span class="text-[15px] ml-4">Blog</span>
+                <span class="text-sm duration-300 {{ !request()->is('admin/dashboard/blogs*') ? 'rotate-180' : '' }}"
+                    id="blog-arrow">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </span>
+            </div>
+        </div>
+
+        <!-- Blog Submenu -->
+        <div class="text-left text-sm font-thin mt-2 w-4/5 mx-auto {{ !request()->is('admin/dashboard/blogs*') ? 'hidden' : '' }}"
+            id="blog-submenu">
+            <a href="{{ route('admin.blogs.create') }}">
+                <h1
+                    class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1 {{ request()->routeIs('admin.blogs.create') ? 'bg-pink-800' : '' }}">
+                    Create</h1>
+            </a>
+            <a href="{{ route('admin.blogs.view') }}">
+                <h1
+                    class="cursor-pointer p-2 hover:bg-pink-800 rounded-md mt-1 {{ request()->routeIs('admin.blogs.view') ? 'bg-pink-800' : '' }}">
+                    View</h1>
+            </a>
+        </div>
+
         <hr class="my-4 text-gray-600">
 
         <!-- Accounts -->

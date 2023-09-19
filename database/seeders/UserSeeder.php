@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Product;
@@ -77,6 +78,9 @@ class UserSeeder extends Seeder
         $invoice_two = Invoice::factory()->create(['user_id' => $customer_ids->random()]);
 
         $invoice_two->orders()->attach($split_actual_order_ids[1]); // attach invoice with second half of acutal order ids for many to many
+
+        // create blogs
+        Blog::factory()->count(10)->create();
 
     }
 }

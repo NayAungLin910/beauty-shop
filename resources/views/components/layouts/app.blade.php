@@ -70,6 +70,12 @@
                             href="{{ route('products.view') }}">Search Products</a>
                     </li>
 
+                    <!-- Search Blog -->
+                    <li>
+                        <a class="text-lg hover:text-pink-500 {{ request()->routeIs('blogs*') ? 'text-pink-500' : '' }}"
+                            href="{{ route('blogs.view') }}">Search Blogs</a>
+                    </li>
+
                     <!-- Profile -->
                     @if (Auth::check())
                     <li class="group/auth pr-4">

@@ -4,14 +4,18 @@ use App\Livewire\Account\Account;
 use App\Livewire\Admin\Statistics;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Blog\CreateBlog;
+use App\Livewire\Blog\EditBlog;
+use App\Livewire\Blog\ViewBlog;
 use App\Livewire\Cart\DammCart;
-use App\Livewire\Cart\ViewCart;
 use App\Livewire\Home;
 use App\Livewire\Invoice\ViewInvoice;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\EditProduct;
 use App\Livewire\Product\ViewProduct;
 use App\Livewire\Profile;
+use App\Livewire\Public\Blog\SingleBlog;
+use App\Livewire\Public\Blog\ViewBlog as BlogViewBlog;
 use App\Livewire\Public\Product\SingleProduct;
 use App\Livewire\Public\Product\ViewProduct as ProductViewProduct;
 use App\Livewire\Tag\Tag;
@@ -59,7 +63,6 @@ Route::middleware(['authOnly'])->group(function () {
             $dompdf->render();
 
             $dompdf->stream('invoice.pdf');
-
         })->name('download');
     });
 });
@@ -68,6 +71,11 @@ Route::prefix('products')->as('products.')->group((function () {
     Route::get('/', ProductViewProduct::class)->name('view');
     Route::get('/pre-values/{tagId?}', ProductViewProduct::class)->name('view-pre');
     Route::get('/view/{id}', SingleProduct::class)->name('single');
+}));
+
+Route::prefix('blogs')->as('blogs.')->group((function () {
+    Route::get('/view/{id}', SingleBlog::class)->name('single');
+    Route::get('/', BlogViewBlog::class)->name('view');
 }));
 
 Route::middleware(['notAuth'])->prefix('auth')->as('auth.')->group(function () {
@@ -99,6 +107,13 @@ Route::middleware(['adminOnly'])->prefix('admin/dashboard')->as('admin.')->group
         Route::get('/create', CreateProduct::class)->name('create');
         Route::get('/', ViewProduct::class)->name('view');
         Route::get('/edit/{id}', EditProduct::class)->name('edit');
+    });
+
+    // blogs
+    Route::prefix('blogs')->as('blogs.')->group(function () {
+        Route::get('/create', CreateBlog::class)->name('create');
+        Route::get('/', ViewBlog::class)->name('view');
+        Route::get('/edit/{id}', EditBlog::class)->name('edit');
     });
 
     // accounts

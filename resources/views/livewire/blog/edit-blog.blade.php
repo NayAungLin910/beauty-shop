@@ -1,10 +1,10 @@
 <div class="flex place-content-center ">
     <div class="mt-10 px-4 py-2 rounded-2xl bg-pink-600 text-white shadow-lg lg:w-1/3 w-full mx-2">
 
-        <!-- Profile -->
-        <img id="profile-image" src="{{ asset('storage' . $product->image) }}"
+        <!-- Old Blog Image -->
+        <img id="profile-image" src="{{ asset('storage' . $blog->image) }}"
             class="my-2 max-w-[10rem] mx-auto border border-none shadow-lg rounded-full" loading="lazy"
-            alt="{{ $product->name }}'s profile image" />
+            alt="{{ $blog->name }}'s profile image" />
 
         <form wire:submit='submit'>
 
@@ -42,18 +42,6 @@
                     :style="`width: ${progress}%;`" />
             </div>
 
-            <!-- Tags -->
-            <div class="">
-                <label for="selects">Tags</label>
-                <div class="mt-5 relative">
-                    <select id="selects" wire:model='selects' multiple="multiple" class="input-form-pink h-24" name="selects[]">
-                        @foreach ($tags as $tag)
-                        <option value="{{ $tag->id }}" wire:key="{{ $tag->id }}">{{ $tag->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
             <!-- Description -->
             <div class="my-2">
                 <label for="description">Description</label>
@@ -66,7 +54,7 @@
 
             <!-- Submit button -->
             <div class="flex place-content-around items-center mx-2">
-                <a href="{{ route('admin.products.view') }}" class="button-white-rounded">Back</a>
+                <a href="{{ route('admin.blogs.view') }}" class="button-white-rounded">Back</a>
                 <button type="submit" class="button-pink-rounded"
                     wire:loading.class="opacity-30 animate-pulse">Save</button>
             </div>

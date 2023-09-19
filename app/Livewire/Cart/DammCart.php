@@ -68,7 +68,7 @@ class DammCart extends Component
             'status' => 'order',
         ]);
 
-        // $this->reset(['description', 'destination']);
+        $this->reset(['description', 'destination']);
 
         $this->dispatch('cart-bought');
 

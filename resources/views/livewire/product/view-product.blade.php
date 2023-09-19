@@ -26,7 +26,7 @@
                 id="tag-sort">
                 <option disabled value="default-tag">Choose Tag</option>
                 @foreach ($tags as $tag)
-                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                <option value="{{ $tag->id }}" wire:key="{{ $tag->id }}">{{ $tag->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -59,7 +59,7 @@
 
             @if ($products && $products->count())
             @foreach ($products as $product)
-            <a href="{{ route('products.single', ['id' => $product->id]) }}">
+            <a href="{{ route('products.single', ['id' => $product->id]) }}" wire:key="{{ $product->id }}">
                 <div class="rounded-xl bg-slate-50 hover:bg-pink-100 shadow-lg w-[20rem]">
                     <img class="w-auto mx-auto rounded-t-xl" src="{{ asset('storage' . $product->image) }}" alt=""
                         loading="lazy">
@@ -71,7 +71,7 @@
                         </p>
                         <div class="flex flex-wrap mt-3 gap-1">
                             @foreach ($product->tags as $tag)
-                            <a href="{{ route('products.view-pre', ['tagId' => $tag->id]) }}">
+                            <a href="{{ route('products.view-pre', ['tagId' => $tag->id]) }}" wire:key="{{ $tag->id }}">
                                 <span class="bg-pink-200 hover:bg-pink-400 p-1 text-black text-sm rounded-lg">
                                     {{ $tag->name }}
                                 </span>

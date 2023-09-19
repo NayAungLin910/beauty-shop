@@ -52,7 +52,6 @@ class ViewCart extends Component
     #[On('product-buy')]
     public function buy()
     {
-        dd($this->description);
         $this->validate();
 
         $invoice = Invoice::create([
